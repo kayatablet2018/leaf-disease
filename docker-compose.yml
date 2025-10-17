@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: ./leaf-disease-backend
+    container_name: leaf-disease-backend
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./leaf-disease-backend:/app
+    networks:
+      - mynetwork
+  frontend:
+    build: ./leaf-disease-frontend
+    container_name: leaf-disease-frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
